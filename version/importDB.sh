@@ -4,7 +4,8 @@ is_number() { echo "$1" | egrep -q '^[0-9]+$'; }
 
 target_bdd=$HOSTNAME_DB/$DB_NAME
 echo "uploading data into $target_bdd"
-cd /tmp/tapaas
+cd /tmp/$DB_NAME
+cp /tmp/*.js .
 
 echo "We retrieve and check the current version" 
 mongo $target_bdd secure-mongo-import.js
