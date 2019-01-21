@@ -27,3 +27,17 @@ These scripts are stored in the version folder, before you build a version, you 
 In order to run the script, you must provide in your mongoshell docker service two environment variables : 
 - HOSTNAME_DB : the address of the database (localhost, 192.168.0.1, 172.22.6.1, my-mongo-db.inner.address are possible examples)
 - DB_NAME : the name of the database you wish to update
+
+### Running exemple
+Let suppose I want to execute my container on a remote MongoDB Base located at the following address : "my.mongo.db.address".
+Let suppose the database name is the following : "MyAlternativeUPPERcaselowerCASE_DB"
+
+We will assume you have already tested and your database is up, running and available from your current container runner.
+
+I should then run my container with the following settings (we will assume you are currently located at the root of this project) : 
+
+```bash
+cp version/* 4.0/.
+docker build -t mongo-shell-example -f Dockerfile .
+docker run -e HOSTNAME_DB=my.mongodb.address -e DB_NAME=MyAlternativeUPPERcaselowerCASE_DB mongo-shell-example
+```
