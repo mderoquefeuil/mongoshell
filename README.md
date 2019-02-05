@@ -24,9 +24,11 @@ This ends up with a version table such as : 3.4.1 where 3 stands for the major v
 
 These scripts are stored in the version folder, before you build a version, you must copy them in the targeted folder.
 
-In order to run the script, you must provide in your mongoshell docker service two environment variables : 
+In order to run the script, you must provide in your mongoshell docker service four environment variables : 
 - HOSTNAME_DB : the address of the database (localhost, 192.168.0.1, 172.22.6.1, my-mongo-db.inner.address are possible examples)
 - DB_NAME : the name of the database you wish to update
+- USER : the name of the user you plan to log in mongo with
+- PASSWORD : the password of the user you plan to log in mongo with (security breach for now, I'll fix it very soon once the whole thing is stabilized)
 
 ### Running exemple
 Let suppose I want to execute my container on a remote MongoDB Base located at the following address : "my.mongo.db.address".
@@ -39,5 +41,5 @@ I should then run my container with the following settings (we will assume you a
 ```bash
 cp version/* 4.0/.
 docker build -t mongo-shell-example -f Dockerfile .
-docker run -e HOSTNAME_DB=my.mongodb.address -e DB_NAME=MyAlternativeUPPERcaselowerCASE_DB mongo-shell-example
+docker run -e HOSTNAME_DB=my.mongodb.address -e DB_NAME=MyAlternativeUPPERcaselowerCASE_DB -e USER=toto -e PASSWORD=tata mongo-shell-example
 ```
