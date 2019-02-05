@@ -2,7 +2,13 @@
 version_gt() { test $(echo "$@" | tr " " "\n" | sort -V | head -n 1) != "$1"; }
 is_number() { echo "$1" | egrep -q '^[0-9]+$'; }
 
+# target bdd knows the login to apply (if needed) and the db address we want to reach
 target_bdd=$HOSTNAME_DB/$DB_NAME
+# If we set a user, we assume we set a password as well, and all this in the connecting command part
+if [ ! -z $USER ]; then
+  target_bdd="$target_bdd -u $USER -p $PASSWORD"
+fi
+
 echo "uploading data into $target_bdd"
 cd /tmp/$DB_NAME
 cp /tmp/*.js .
